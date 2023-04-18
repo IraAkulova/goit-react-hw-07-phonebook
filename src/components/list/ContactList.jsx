@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from '../../redux/contactsSlice';
+import { deleteContact } from '../../redux/operations';
+import { getContacts, getFilter } from 'redux/selectors';
 
-export const ContactList = () => {
-  const contacts = useSelector(state => state.contacts);
-  const filter = useSelector(state => state.filter);
+export const ContactList = ({contact}) => {
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
 
   const dispatch = useDispatch();
 
@@ -22,7 +23,7 @@ export const ContactList = () => {
     <ul>
       {visibleContacts.map(contact => (
         <li key={contact.id}>
-          {contact.name}: {contact.number}
+          {contact.name}: {contact.phone}
           <button
             type="button"
             onClick={() => {
